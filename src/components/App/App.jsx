@@ -1,25 +1,44 @@
-
-import Section from 'components/Section';
-import Phonebook from 'components/Phonebook';
-import ContactsList from 'components/ContactsList';
-import ContactFilter from 'components/ContactFilter';
+import { GlobalStyle } from 'GlobalStyles';
+import { Container, FirstTitle } from './App.styled';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
+import toast, { Toaster } from 'react-hot-toast';
+import { selectError } from 'redux/selectors';
 import { useSelector } from 'react-redux';
-import { FirstTitle, SecondTitle,WithoutContacts } from './App.styled';
+import { useEffect } from 'react';
 
-export default function App() {
-const contacts = useSelector(state => state.contacts.items);
-  
+export const App = () => {
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    if (error) {
+      toast.error('Something went wrong, please try again later');
+    }
+  }, [error]);
+
   return (
-    <Section>
-      <FirstTitle>Phonebook</FirstTitle>
-      <Phonebook title="Phonebook" />
-      <ContactFilter title="Find contacts by name:" />
-      <SecondTitle>Contacts</SecondTitle>
-      {contacts.length === 0 ? (
-        <WithoutContacts>There are no contacts in your phonebook</WithoutContacts>
-      ) : (
-          <ContactsList title="Contacts" />
-          )}
-    </Section>
+    <Container>
+          <FirstTitle>Phonebook</FirstTitle>
+      <ContactForm />
+      <ContactList />
+      <GlobalStyle />
+      <Toaster
+        position="top-center"
+  reverseOrder={false}
+        gutter={4}
+        containerStyle={{
+          top: 53,
+        }}
+        toastOptions={{
+          duration: 3000,
+          style: {
+            width: '360px',
+            padding: '16px',
+             background: '#363636',
+      color: '#fff',
+          },
+        }}
+      />
+    </Container>
   );
-}
+};

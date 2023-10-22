@@ -1,17 +1,8 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
- const FilterLabel = styled.label`
-  display: flex;
-  flex-direction: column;
-  font-weight: 600;
-   text-transform: uppercase;
-  
-
-`;
-
-const FilterInput = styled.input`
+export const SearchInput = styled.input`
  
-  margin-top: 5px;
+  margin: 0px 15px 15px 15px;
                     background-color: #fff;
                     height: 31px;
                     padding: 3px 7px;
@@ -35,4 +26,11 @@ const FilterInput = styled.input`
 `;
 
 
-export{FilterLabel,FilterInput }
+export const SearchLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+   text-transform: uppercase;
+  
+
+`;
